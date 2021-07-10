@@ -1,8 +1,7 @@
 import express from "express";
-
+import Joi from 'joi'
+import User from '../models/user.js'
 const router = express.Router();
-const Joi = require("joi");
-const User = require("../models/user");
 
 const postUserschema = Joi.object({
   nickname: Joi.string()
@@ -20,7 +19,7 @@ const postUserschema = Joi.object({
   intro: Joi.string().min(3).required(),
 });
 // 회원가입 검사 및 등록
-router.post("/", multer.none(), async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { loginId, nickname, password, intro } =
       await postUserschema.validateAsync(req.body);
@@ -35,8 +34,7 @@ router.post("/", multer.none(), async (req, res) => {
       password,
       intro,
     });
-    res.status(201).send({ message: "회원가입을 축하합니다." });
-    return;
+    return res.status(201).send({ message: "회원가입을 축하합니다." })
   } catch (err) {
     console.error(err);
     res

@@ -3,7 +3,7 @@ import Post from '../models/post.js'
 
 const router = express.Router()
 
-router.put('/:postId', (req, res, next) => {
+router.put('/:postId', (req, res) => {
 	const { postId } = req.params
 	const { text } = req.body
 	Post.findByIdAndUpdate(postId, text).exec().then(() => {
@@ -15,7 +15,7 @@ router.put('/:postId', (req, res, next) => {
 		})
 	})
 })
-router.delete('/:postId', (req, res, next) => {
+router.delete('/:postId', (req, res) => {
 	const { postId } = req.params
 	Post.findByIdAndDelete(postId).exec().then(() => {
 		res.sendStatus(200)
@@ -26,7 +26,7 @@ router.delete('/:postId', (req, res, next) => {
 		})
 	})
 })
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
 	Post.find().populate('comments').exec().then(posts => {
 		res.send(posts)
 	}).catch(err => {
@@ -36,18 +36,11 @@ router.get('/', (req, res, next) => {
 		})
 	})
 })
-router.post('/', (req, res, next) => {
+router.post('/', (req, res) => {
 	//todo: load user info from res.locals created by token
-	const { text } = req.body
-
-	const userId = null
-	Post.create({ text, userId }).then(() => {
-
+	//const userId = null
 	//const userId = 'test'
-	console.log(text)
-	Post.create(req.body).then(result => {
-		console.log(result)
-
+	Post.create(req.body).then(() => {
 		res.sendStatus(201)
 	}).catch(err => {
 		console.error(err)

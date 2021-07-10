@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
-const userSchema = new Schema({
+export const userSchema = new Schema({
   loginId: {
     type: String,
     required: true,
@@ -17,4 +17,4 @@ const userSchema = new Schema({
     required: true,
   },
 });
-module.exports = mongoose.model("User", userSchema);
+export default mongoose.model("User", userSchema);

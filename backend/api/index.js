@@ -1,27 +1,16 @@
-import express from "express";
-import multer from "multer";
-import postsRouter from "./posts";
-import commentsRouter from "./comments";
-import signupRouter from "./signup";
-import signinRouter from "./signin";
-import duplicateRouter from "./duplicate";
+import express from 'express'
+import postsRouter from './posts.js'
+import commentsRouter from './comments.js'
+import signupRouter from './signup.js'
+import signinRouter from './signin.js'
+import duplicateRouter from './duplicate.js'
 
-import path from "path";
+const router = express.Router()
 
-const router = express.Router();
+router.use('/posts', postsRouter)
+router.use('/comments', commentsRouter)
+router.use('/signin', signinRouter)
+router.use('/signup', signupRouter)
+router.use('/duplicate', duplicateRouter)
 
-router.use(multer().none());
-router.use("/posts", postsRouter);
-router.use("/comments", commentsRouter);
-router.use("/signin", signinRouter);
-router.use("/signup", signupRouter);
-router.use("/duplicate", duplicateRouter);
-
-router.get("/", (req, res, next) => {
-  res.sendFile(path.join(path.resolve(), "/index.html"));
-});
-
-router.use("/api/posts", postsRouter);
-router.use("/api/comments", commentsRouter);
-
-export default router;
+export default router

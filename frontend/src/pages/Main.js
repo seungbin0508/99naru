@@ -6,12 +6,24 @@ import {useSelector} from "react-redux";
 
 function Main() {
   const dispatch = useDispatch();
+<<<<<<< HEAD
   const post_list = useSelector((state) => state)
   
   React.useEffect(() => {
   dispatch(postActions.getPostDB)
   console.log(post_list)
 }, []);
+=======
+
+	React.useEffect(() => {
+		axios.get('http://localhost:3000/api/posts'
+		).then(response => {
+			console.log(response.data)
+		}).catch(error => {
+			console.error(error)
+		})
+	})
+>>>>>>> 7fd38b69026f73db0dc0d5ae6356c64e7612f948
 
 
   return (

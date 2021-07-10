@@ -1,10 +1,10 @@
 import express from "express";
+import User from '../models/user.js'
 
 const router = express.Router();
-const User = require("../models/user");
 
 //   loginId, nickname 회원가입 중복체크
-router.post("/", multer.none(), async (req, res) => {
+router.post("/", async (req, res) => {
   const { loginId, nickname } = req.body;
   const existUser = await User.find({
     $and: [{ $or: [{ nickname }, { loginId }] }],

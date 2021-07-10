@@ -1,11 +1,11 @@
 import express from "express";
+import jwt from 'jsonwebtoken'
+import User from '../models/user.js'
 
 const router = express.Router();
-const jwt = require("jsonwebtoken");
-const User = require("../models/user");
 
 // 회원가입 검사 및 등록
-router.post("/", multer.none(), async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { loginId, password } = req.body;
     const user = await User.findOne({
@@ -20,14 +20,11 @@ router.post("/", multer.none(), async (req, res) => {
     }
     // 토큰 생성
     const userInfo = { userId: user._id, nickname: user.nickname };
-    const secretKey = "TTEOKBOKKI";
     const options = {
       expiresIn: "5m",
     };
-    const token = jwt.sign(userInfo, secretKey, options);
-    res.send({
-      token,
-    });
+    const token = jwt.sign(userInfo, process.env.SECRET_KEY, options);
+    res.send({ token })
   } catch (err) {
     console.error(err);
     res.status(400).send({
