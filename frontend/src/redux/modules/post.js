@@ -37,10 +37,12 @@ const addPostDB = (contents = "", layout_type="a") => {
  
 };
 
-const getPostDB = (start = null, size = 3) => {
+const getPostDB = (dispatch) => {
+  
   axios.get('http://localhost:3000/api/posts',
 ).then(function (response) {
     console.log(response);
+    dispatch(setPost(response.data))
   })
   .catch(function (error) {
     console.log(error);

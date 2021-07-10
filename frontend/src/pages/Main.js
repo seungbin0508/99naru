@@ -1,21 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from "react-redux";
-import { actionCreators as postActions } from "../redux/modules/user";
-import axios from 'axios';
-
+import { actionCreators as postActions } from "../redux/modules/post";
+import {useSelector} from "react-redux";
 
 function Main() {
   const dispatch = useDispatch();
-      
+  const post_list = useSelector((state) => state)
+  
   React.useEffect(() => {
-    axios.get('http://localhost:3000/api/posts', 
-  ).then(function (response) {
-      console.log(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+  dispatch(postActions.getPostDB)
+  console.log(post_list)
 }, []);
 
 
@@ -66,7 +61,7 @@ margin : 0px 0px 0px 160px;
 const Grid = styled.div`
   background-color : #eee;
   width : 650px;
-  height : 800px;
+  height : 1200px;
   display : flex;
   margin : 10px;
   margin-top : 50px;
@@ -84,7 +79,7 @@ const Grid2 = styled.div`
 const Grid3 = styled.div`
   background-color : #eee;
   width : 300px;
-  height : 800px;
+  height : 1200px;
   display : flex;
   flex-direction: column;
   margin : 10px;
