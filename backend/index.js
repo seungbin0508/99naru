@@ -19,6 +19,8 @@ app.use(express.urlencoded({ extended: false }))
 
 app.use('/api', router)
 
+//todo testCode for news crawl
+import './crawl/index.js'
 server.listen(process.env.PORT || 3000, () => {
 	console.log('서버 연결')
 })
