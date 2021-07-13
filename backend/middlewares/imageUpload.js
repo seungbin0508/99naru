@@ -16,7 +16,7 @@ aws.config.loadFromPath(__dirname + '/config/s3.json');
             cb(null, { fieldName: file.fieldname }) 
           },
           key: function(req, file, cb){
-                  cb(null, Date.now() + '.' + file.originalname.split('.').pop()); // 이름 설정
+          cb(null, 'profilePic/' + Date.now() + '.' + file.originalname.split('.').pop());
           },
       }),
       limits: { fileSize: 5 * 1024 * 1024 },
