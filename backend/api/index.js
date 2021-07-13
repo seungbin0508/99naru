@@ -15,6 +15,8 @@ router.use(auth);
 router.use("/posts", postsRouter);
 router.use("/comments", commentsRouter);
 router.use("/duplicate", duplicateRouter);
-router.use("/social", socialRouter);
+router.use("/google", socialRouter);
+router.use("/github", socialRouter);
+router.use("/kakao", socialRouter);
 
 export default router;

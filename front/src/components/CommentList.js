@@ -12,21 +12,23 @@ import {
 } from "react-icons/io5";
 
 const CommentList = (props) => {
+  console.log(props.post_info)
+  console.log(props.comments)
   return (
     <Grid is_flex padding="0px 16px 0px 16px">
       <Grid center is_flex width="20%">
         <Image shape="circle" />
-        <Text bold>오늘은 코딩왕</Text>
+        <Text bold>닉네임</Text>
       </Grid>
       <Grid is_flex margin="0px 4px">
         <Grid width="70%">
           <Text margin="0px 0px 0px 5px">
-            완전 유익한 정보네요!! 감사합니다~~~~~~~!
+            {props.comments.text}
           </Text>
         </Grid>
         <Grid is_flex width="100%">
           <Grid right>
-            <Text>작성 시간</Text>
+            <Text>{props.comments.created_at.split("T")[0]}</Text>
           </Grid>
           <Grid is_flex width="100" padding="0px 10px">
             <IconWrap>

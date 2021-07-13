@@ -1,6 +1,8 @@
 import express from "express";
 import passport from "passport";
 
+import dotenv from "dotenv";
+dotenv.config();
 // strategy import
 import Google from "passport-google-oauth2";
 import Kakao from "passport-kakao";
@@ -32,7 +34,7 @@ function authSuccess(req, res) {
       myemail = email;
     }
 
-    if (mynickname === "") {
+    if (!mynickname) {
       throw new Error("invalidUser");
     } else if (!myemail) {
       res.send({ nickname: mynickname });
@@ -56,9 +58,8 @@ passport.deserializeUser((user, done) => {
 passport.use(
   new GoogleStrategy(
     {
-      clientID:
-        "592072429727-d4j4hpsnufruqncsrojb75g4ur3u951h.apps.googleusercontent.com",
-      clientSecret: "RXuqpCKNpXX85FCHGn7VUeAi",
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/api/social/google/callback",
       passReqToCallback: true,
     },
@@ -82,7 +83,7 @@ passport.use(
   "kakao",
   new KakaoStrategy(
     {
-      clientID: "88806fd7f63dd24d3065af028f601b16",
+      clientID: process.env.KAKAO_CLIENT_ID,
       callbackURL: "/api/social/kakao/callback", // 위에서 설정한 Redirect URI
     },
     async (accessToken, refreshToken, profile, done) => {
@@ -100,8 +101,8 @@ router.get("/kakao/callback", passport.authenticate("kakao"), authSuccess);
 passport.use(
   new GithubStrategy(
     {
-      clientID: "b2a3935e70cf762e6962",
-      clientSecret: "953ab00280597f0c254066c6ae1a541a02aaf44f",
+      clientID: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: "/api/social/github/callback",
       passReqToCallback: true,
     },

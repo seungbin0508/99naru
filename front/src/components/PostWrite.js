@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 
 const PostWrite = (props) => {
+  const user_nick = useSelector((state) => state.user.nick_name);
   const dispatch = useDispatch();
   const [addPost, setPost] = React.useState("");
   const [modifypost, setModify] = React.useState("");
@@ -13,7 +14,7 @@ const PostWrite = (props) => {
     console.log(addPost)
     // dispatch(postActions.addPostDB(addPost))
     axios
-      .post("http://localhost:3000/api/posts", 
+      .post("http://localhost:3000/api/posts",
       {text: `${addPost}`,},
       {headers : {'Authorization': `Bearer ${sessionStorage.getItem("MY_SESSION")}`}}
       )
@@ -31,7 +32,7 @@ const PostWrite = (props) => {
         <Grid is_flex padding="16px">
           <Grid width="20%" padding="16px">
             <Image circle size="70"></Image>
-            <div>sungsu</div>
+            <div>{user_nick}</div>
           </Grid>
           <Grid width="80%">
             <Input _onChange={(e)=>{setPost(e.target.value)}} multiLine />

@@ -1,7 +1,7 @@
 import { io } from './index.js'
-import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 import User from './models/user.js'
+require('dotenv').config()
 
 
 const currentOn = [];
