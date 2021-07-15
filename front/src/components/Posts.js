@@ -108,9 +108,6 @@ const PostList = (props) => {
                 </IconClickSpan>
               </IconThumbWrap>}
             </Grid>
-            {/* <Grid>
-              <LikeNumber>1</LikeNumber>
-            </Grid> */}
           </Grid>
           <IconWrap>
             <IconClickSpan>
