@@ -76,7 +76,14 @@ const IconWrap = styled.div`
   text-align: center;
   font-size: 2rem;
   color: #1da1f2;
-  cursor: pointer;
+  border-radius: 20px;
+  :hover {
+    max-width: 50px;
+    border-radius: 100px;
+    background-color: #f7f9f9;
+    border: none;
+    cursor: pointer;
+  }
 `;
 
 export default SideBar;
