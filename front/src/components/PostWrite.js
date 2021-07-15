@@ -23,10 +23,12 @@ const PostWrite = (props) => {
   return (
     <React.Fragment>
       <WriteForm>
-        <Grid is_flex padding="16px" width="100%">
+        <Grid is_flex padding="16px" width="100%" left>
           <Grid width="20%" padding="16px">
-            <Image circle size="70"></Image>
-            <Grid>{user_nick}</Grid>
+            <Grid is_flex>
+              <Image circle size="70"></Image>
+            </Grid>
+            <nickName>{user_nick}</nickName>
           </Grid>
           <Grid width="80%">
             <Input value={text} _onChange={(e)=>{setTest(e.target.value)}} multiLine />
@@ -43,6 +45,10 @@ const PostWrite = (props) => {
     </React.Fragment>
   );
 };
+
+const nickName = styled.span`
+  display: inline-block;
+`;
 
 const WriteForm = styled.div`
   box-sizing: border-box;
