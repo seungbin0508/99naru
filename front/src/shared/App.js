@@ -24,7 +24,6 @@ const App = (props) => {
   }, [])
 
   return (
-
     <React.Fragment>
       <ConnectedRouter history={history}>
         <Route path="/" exact component={SignInSide} />

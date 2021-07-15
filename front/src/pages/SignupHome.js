@@ -45,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignupSide() {
   const classes = useStyles();
-  const Idinput = useRef();
-  console.log(Idinput.focus)
+  // const Idinput = useRef();
+  // console.log(Idinput.focus)
   const dispatch = useDispatch();
   const [id, setId] = React.useState("");
   const [pwd, setPwd] = React.useState("");
@@ -75,12 +75,13 @@ export default function SignupSide() {
       nickname : `${nick}`,
     },)
     .then((res) => {
-      console.log(res.status)
+      console.log(res)
       {setduplicate(res.status === 200)}
+      console.log(res)
       window.alert("확인 성공!")
     }).catch(function(err) {
     	console.error(err)
-      window.alert("형식을 맞춰주세요!")
+      window.alert("아이디 또는 닉네임이 이미 존재합니다!")
     });
   }
 
@@ -100,6 +101,8 @@ export default function SignupSide() {
   console.log(id, pwd, nick)
   dispatch(userActions.signupDB(id, pwd, nick))
 };
+
+
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -155,8 +158,6 @@ export default function SignupSide() {
               type="password"
               id="password"
               autoComplete="current-password"
-              // inputProps = {{ pattern: "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]"}}
-              //todo 여기랑 함수 패턴이 중복돼요
             />
             <TextField
               onChange={(e) => {setPwdCheck(e.target.value)}}
