@@ -20,7 +20,9 @@ import { actionCreators as userActions } from "../redux/modules/user";
 const SideBar = (props) => {
   const dispatch = useDispatch();
   const logout = () => {
-    dispatch(userActions.logOut());
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      dispatch(userActions.logOut());
+    }
   }
   const goMyHome = () => {
     window.location.href = "/main/home"
