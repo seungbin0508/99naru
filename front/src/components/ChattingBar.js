@@ -2,16 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Text, Image, Grid } from "../elements";
 import io from "socket.io-client";
-import TextField from "@material-ui/core/TextField";
 import jwt_decode from "jwt-decode";
-import ChatLog from "./ChatLog";
 
 const ChattingBar = (props) => {
   const token = sessionStorage.getItem("MY_SESSION");
   const decoded = jwt_decode(token);
   const nickname = decoded.nickname;
-  const user_id = decoded.userId;
-  const date = new Date().toLocaleTimeString();
+  let date = new Date().toLocaleTimeString();
 
   const [state, setState] = useState({
     message: "",
@@ -26,8 +23,6 @@ const ChattingBar = (props) => {
   useEffect(() => {
     socketRef.current = io.connect("http://13.209.13.200");
     socketRef.current.on("chatLog", (chats) => {
-      console.log(chats);
-      console.log({ chats });
       setChats([...chats, { chats }]);
     });
     socketRef.current.on("receiveMsg", ({ nickname, message, date }) => {
@@ -41,7 +36,8 @@ const ChattingBar = (props) => {
   };
 
   const onMessageSubmit = (e) => {
-    const { message, nickname, date } = state;
+    let date = new Date().toLocaleTimeString();
+    const { message, nickname } = state;
     socketRef.current.emit("sendMsg", { message, nickname, date });
     e.preventDefault();
     setState({ message: "", nickname: nickname, date: date });
@@ -51,7 +47,6 @@ const ChattingBar = (props) => {
     if (!chats.length) {
       return <div>로딩 중...</div>;
     }
-    console.log(chats);
     return chats.map((chatting, index) => (
       <MessageWrap key={index}>
         <ImageWrap>
@@ -77,8 +72,6 @@ const ChattingBar = (props) => {
             name="message"
             onChange={(e) => onTextChange(e)}
             value={state.message}
-            id="outlined-multiline-static"
-            variant="outlined"
             label="Message"
           />
         </form>
@@ -91,7 +84,6 @@ const MessageWrap = styled.div`
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   justify-content: flex-start;
   width: 100%;
   height: auto;
@@ -116,7 +108,7 @@ const ElMessage = styled.span`
 const SenderWrap = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   color: #212121;
 `;

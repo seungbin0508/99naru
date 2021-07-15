@@ -42,6 +42,11 @@ const Container = styled.div`
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 export default PostHome;

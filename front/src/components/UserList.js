@@ -17,8 +17,6 @@ const UserList = (props) => {
     socketRef.current = io.connect("http://13.209.13.200");
     socketRef.current.emit("join", { nickname });
     socketRef.current.on("currentOn", (currentOn) => {
-      console.log(currentOn); // 이게 나와야 하나씩 나올텐데
-      console.log({ currentOn });
       setCurrentOn(currentOn);
     });
     return () => socketRef.current.disconnect();
@@ -28,8 +26,6 @@ const UserList = (props) => {
     if (!currentOn.length) {
       return <div>로딩 중...</div>;
     }
-    console.log(currentOn)
-    console.log(typeof currentOn)
     return currentOn.map((current, index) => (
       <Wrapper>
         <Grid is_flex>

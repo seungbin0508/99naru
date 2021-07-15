@@ -35,7 +35,7 @@ const SideBar = (props) => {
     <React.Fragment>
       <Container>
         <IconWrap>
-          <IoHome onClick={goMyHome}/>
+          <IoHomeOutline onClick={goMyHome}/>
         </IconWrap>
         <IconWrap>
           <IoPersonOutline onClick={goMyPage}/>
