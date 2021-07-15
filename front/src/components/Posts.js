@@ -6,11 +6,14 @@ import CommentList from "./CommentList";
 import {
   IoChatbubbleEllipsesOutline,
   IoChatbubbleEllipsesSharp,
-  IoThumbsUpOutline,
-  IoThumbsUpSharp,
   IoTrash,
   IoSettingsOutline,
+  IoSettings,
 } from "react-icons/io5";
+import {
+  AiOutlineLike,
+  AiFillLike
+} from "react-icons/ai"
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as postActions } from "../redux/modules/post";
 import axios from "axios";
@@ -19,7 +22,10 @@ const PostList = (props) => {
   const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
   const [showComment, setShowComment] = React.useState(false);
+  const [clickLike, setClickLike] = React.useState(false);
   const [editPost, setEdit] = React.useState("");
+  const click_like = () => { setClickLike(false) };
+  const unclick_like = () => { setClickLike(true) };
   const show_edit_cnt = () => {setShowComment(true)};
   const hide_edit_cnt = () => {setShowComment(false)};
   const show_edit = () => {setShow(true)};
@@ -53,10 +59,10 @@ const PostList = (props) => {
               <Grid right>
                 <Text>{props.post_data.created_at}</Text>
               </Grid>
-              {post_user_id===user_info_id ? 
+              {post_user_id===user_info_id ?
               <Grid is_flex width="100" left padding="0px 10px">
               <IconWrap>
-                {show ? <IoSettingsOutline onClick={hide_edit} />:<IoSettingsOutline onClick={show_edit} />}
+                {show ? <IoSettings onClick={hide_edit} />:<IoSettingsOutline onClick={show_edit} />}
 
               </IconWrap>
               <IconWrap>
@@ -70,8 +76,8 @@ const PostList = (props) => {
         <Grid padding="16px" is_flex>
           {/* <Grid width="10%"></Grid> */}
           <Grid width="100%" bg="#F7F9F9" padding="8px">
-            
-            {show ? 
+
+            {show ?
             <div>
               <Input value={editPost} _onChange={(e) => {setEdit(e.target.value)}} placeholder="게시글 수정 중.." multiLine>
               </Input>
@@ -90,11 +96,17 @@ const PostList = (props) => {
         <Grid is_flex padding="0px 26px" width="100%">
           <Grid is_flex width="100%" left>
             <Grid>
+              {clickLike ?
               <IconThumbWrap>
                 <IconClickSpan>
-                  <IoThumbsUpOutline /> {props.post_data.likedUsers.length}
+                  <AiFillLike onClick={click_like} /> {props.post_data.likedUsers.length + 1}
                 </IconClickSpan>
-              </IconThumbWrap>
+              </IconThumbWrap> :
+              <IconThumbWrap>
+                <IconClickSpan>
+                  <AiOutlineLike onClick={unclick_like} /> {props.post_data.likedUsers.length}
+                </IconClickSpan>
+              </IconThumbWrap>}
             </Grid>
             {/* <Grid>
               <LikeNumber>1</LikeNumber>
@@ -102,21 +114,20 @@ const PostList = (props) => {
           </Grid>
           <IconWrap>
             <IconClickSpan>
-             {showComment ?
-             <IoChatbubbleEllipsesSharp onClick={hide_edit_cnt} />
-             :
-             <IoChatbubbleEllipsesSharp onClick={show_edit_cnt}/> }
-              
+              {showComment ?
+              <IoChatbubbleEllipsesSharp onClick={hide_edit_cnt} />
+              :
+              <IoChatbubbleEllipsesOutline onClick={show_edit_cnt}/> }
             </IconClickSpan>{props.post_data.comments.length}
           </IconWrap>
         </Grid>
-      {showComment ? 
+      {showComment ?
         <Grid>
         {comments.map((p, idx) => {
             return <CommentList key={idx} comments={p} post_info={props}></CommentList>
           })}
           <CommentWrite post_id={post_id}></CommentWrite>
-        </Grid> 
+        </Grid>
     :<div></div>}
 
 
