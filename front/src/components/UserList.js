@@ -27,9 +27,9 @@ const UserList = (props) => {
       return <div>Please refresh...</div>;
     }
     return currentOn.map((current, index) => (
-      <Wrapper margin="0px 0px 5px 0px">
+      <Wrapper margin="0px 0px 5px 0px" key={index}>
         <Grid is_flex bg="#f7f9f9">
-            <Grid is_flex left key={index}>
+            <Grid is_flex left >
               <Image shape="circle" />
               <Text padding="0px 10px" bold>{current}</Text>
             </Grid>
