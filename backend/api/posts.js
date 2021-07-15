@@ -6,7 +6,7 @@ const router = express.Router()
 router.put('/:postId/like', (req, res) => {
 	const { postId } = req.params
 	const { userId } = res.locals
-	Post.findById(postId).exec().then((post) => {
+	Post.findById(postId).exec().then(post => {
 		const { likedUsers } = post
 		likedUsers.push(userId)
 		post.save().then(() => res.sendStatus(200))
@@ -15,7 +15,11 @@ router.put('/:postId/like', (req, res) => {
 router.put('/:postId/unlike', (req, res) => {
 	const { postId } = req.params
 	const { userId } = res.locals
-	// todo: https://stackoverflow.com/questions/26252569/mongoose-delete-subdocument-array-item
+	Post.findById(postId).exec().then(post => {
+		const { likedUsers } = post
+		likedUsers.id(userId).remove()
+		post.save().then(() => { res.sendStatus(200) })
+	})
 })
 
 router.put('/:postId', (req, res) => {
