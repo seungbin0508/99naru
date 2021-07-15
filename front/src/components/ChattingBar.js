@@ -87,7 +87,7 @@ const MessageWrap = styled.div`
   justify-content: flex-start;
   width: 100%;
   height: auto;
-  margin: 0px 0px 50px 0px;
+  margin: 0px 0px 25px 0px;
   background-color: #f7f9f9;
   border-radius: 20px;
   border: 1px solid whitesmoke;
@@ -125,8 +125,9 @@ const SenderTimeSpan = styled.span`
   min-width: 50px;
   width: 100%;
   text-align: left;
-  margin: 5px 0px;
+  margin: 2px 0px;
   color: #adb5bd;
+  font-size: 12px;
 `;
 
 const ImageWrap = styled.div`
@@ -173,12 +174,12 @@ const ChattingList = styled.div`
   box-sizing: border-box;
   background-color: #ffffff;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
   height: 100%;
-  padding: 30px 30px 60px;
+  padding: 30px 20px 0px;
   overflow-x: hidden;
   overflow-y: auto;
   ::-webkit-scrollbar {
@@ -205,7 +206,6 @@ const ChattingInput = styled.input`
   background-color: #ffffff;
   border: 1px solid #1da1f2;
   width: 100%;
-  margin-left: 10px;
   padding: 12px 15px;
   box-sizing: border-box;
   font-size: 18px;

@@ -24,14 +24,14 @@ const UserList = (props) => {
 
   const showCurrentOn = (props) => {
     if (!currentOn.length) {
-      return <div>로딩 중...</div>;
+      return <div>Please refresh...</div>;
     }
     return currentOn.map((current, index) => (
-      <Wrapper>
-        <Grid is_flex>
+      <Wrapper margin="0px 0px 5px 0px">
+        <Grid is_flex bg="#f7f9f9">
             <Grid is_flex left key={index}>
               <Image shape="circle" />
-              <Text>{current}</Text>
+              <Text padding="0px 10px" bold>{current}</Text>
             </Grid>
           <Grid width="0%"></Grid>
         </Grid>
@@ -91,7 +91,7 @@ const UserWrap = styled.div`
   justify-content: flex-start;
   width: 100%;
   height: 100%;
-  padding: 30px 30px 60px;
+  padding: 13px 20px 60px 15px;
   overflow-x: hidden;
   overflow-y: auto;
   ::-webkit-scrollbar {
@@ -99,17 +99,6 @@ const UserWrap = styled.div`
   }
   -ms-overflow-style: none;
   scrollbar-width: none;
-`;
-
-// 유저바 입력창
-const ChattingInput = styled.input`
-  background-color: #ffffff;
-  border: none;
-  width: 90%;
-  margin-left: 10px;
-  padding: 12px 4px;
-  box-sizing: border-box;
-  font-size: 18px;
 `;
 
 export default UserList;
