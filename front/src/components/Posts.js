@@ -53,7 +53,7 @@ const PostList = (props) => {
               <Grid right>
                 <Text>{props.post_data.created_at}</Text>
               </Grid>
-              {post_user_id===user_info_id ? 
+              {post_user_id===user_info_id ?
               <Grid is_flex width="100" left padding="0px 10px">
               <IconWrap>
                 {show ? <IoSettingsOutline onClick={hide_edit} />:<IoSettingsOutline onClick={show_edit} />}
@@ -70,8 +70,8 @@ const PostList = (props) => {
         <Grid padding="16px" is_flex>
           {/* <Grid width="10%"></Grid> */}
           <Grid width="100%" bg="#F7F9F9" padding="8px">
-            
-            {show ? 
+
+            {show ?
             <div>
               <Input value={editPost} _onChange={(e) => {setEdit(e.target.value)}} placeholder="게시글 수정 중.." multiLine>
               </Input>
@@ -102,21 +102,20 @@ const PostList = (props) => {
           </Grid>
           <IconWrap>
             <IconClickSpan>
-             {showComment ?
-             <IoChatbubbleEllipsesSharp onClick={hide_edit_cnt} />
-             :
-             <IoChatbubbleEllipsesSharp onClick={show_edit_cnt}/> }
-              
+              {showComment ?
+              <IoChatbubbleEllipsesSharp onClick={hide_edit_cnt} />
+              :
+              <IoChatbubbleEllipsesOutline onClick={show_edit_cnt}/> }
             </IconClickSpan>{props.post_data.comments.length}
           </IconWrap>
         </Grid>
-      {showComment ? 
+      {showComment ?
         <Grid>
         {comments.map((p, idx) => {
             return <CommentList key={idx} comments={p} post_info={props}></CommentList>
           })}
           <CommentWrite post_id={post_id}></CommentWrite>
-        </Grid> 
+        </Grid>
     :<div></div>}
 
 
