@@ -78,13 +78,15 @@ const PostList = (props) => {
           <Grid width="100%" bg="#F7F9F9" padding="8px">
 
             {show ?
-            <div>
-              <Input value={editPost} _onChange={(e) => {setEdit(e.target.value)}} placeholder="게시글 수정 중.." multiLine>
+            <Grid>
+              <Input value={editPost} _onChange={(e) => {setEdit(e.target.value)}} placeholder="게시글 수정 중.." multiLine >
               </Input>
-            <Button width="15%" _onClick={modifyPost}>
-              수정
-              </Button>
-            </div>
+              <Grid right>
+                <Button width="15%" _onClick={modifyPost}>
+                  수정
+                </Button>
+              </Grid>
+            </Grid>
             :
             <Text padding="5px 10px" size="18px">
             {props.post_data.text}
@@ -108,9 +110,6 @@ const PostList = (props) => {
                 </IconClickSpan>
               </IconThumbWrap>}
             </Grid>
-            {/* <Grid>
-              <LikeNumber>1</LikeNumber>
-            </Grid> */}
           </Grid>
           <IconWrap>
             <IconClickSpan>
@@ -148,7 +147,7 @@ const IconWrap = styled.div`
   /* padding: 0px 0rem; */
   /* margin: 2rem 0px; */
   text-align: right;
-  font-size: 2rem;
+  font-size: 1.9rem;
   color: #1da1f2;
 `;
 
